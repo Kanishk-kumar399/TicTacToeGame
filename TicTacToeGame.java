@@ -2,7 +2,6 @@ import java.util.*;
 public class TicTacToeGame
 {
     static char[] board;
-    static char Turn;
     Scanner sc=new Scanner(System.in);
     public static void boardCreate()
     {
@@ -15,16 +14,24 @@ public class TicTacToeGame
     public static char newTurn()
     {
     	Scanner s=new Scanner(System.in);
-    	System.out.println("Enter P for player and C for Computer");
-    	char gamePlayer=s.next().charAt(0);
     	System.out.println("Enter X or O as your turn");
-    	Turn=s.next().charAt(0);
-    	return Turn;
+    	char Symbol=s.next().charAt(0);
+    	System.out.println(Symbol+" is for Player");
+    	return Symbol;
     }
+    public static void displayBoard()
+    {
+		System.out.println("  "+board[1] + " | " + board[2] + " | " + board[3]);
+		System.out.println("--------------");
+		System.out.println("  "+board[4] + " | " + board[5] + " | " + board[6]);
+		System.out.println("--------------");
+		System.out.println("  "+board[7] + " | " + board[8] + " | " + board[9]);
+    }
+    
     public static void main(String args[])
     {
-        TicTacToeGame obj=new TicTacToeGame();
-        obj.boardCreate();
-        obj.newTurn();
+        boardCreate();
+        newTurn();
+        displayBoard();
     }
 }
