@@ -32,14 +32,16 @@ public class TicTacToeGame
         Scanner a=new Scanner(System.in);
         System.out.println("Enter an Index from 1 to 9");
         int i=a.nextInt();
-	if(board[i]==' ')
-            return i;
-            else
+	while(true)
             {
+            if(board[i]!=' ')
+             	{
                 System.out.println("Choose Another Index! Index not free");
-                return chooseIndex();
+             	}
+            else 
+            	break;
             }
-
+            return i;
     }
     public static void makeDesiredMove(int indexForPlaying,char playerTurn)
     {
