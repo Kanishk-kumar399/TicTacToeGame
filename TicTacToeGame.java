@@ -14,7 +14,7 @@ public class TicTacToeGame
     public static char newTurn()
     {
     	Scanner s=new Scanner(System.in);
-    	System.out.println("Enter X or O as your turn");
+    	System.out.println("Enter X or O as your turn.");
     	char Symbol=s.next().charAt(0);
     	System.out.println(Symbol+" is for Player");
     	return Symbol;
