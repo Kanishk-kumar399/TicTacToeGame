@@ -1,6 +1,10 @@
 import java.util.*;
 public class TicTacToeGame
 {
+    static final int HEADS=0;
+    static final int TAILS=1;
+    static final String USER="USER starts first";
+    static final String COMPUTER ="COMPUTER starts first";
     static char[] board;
     /*UC1*/
     public static void boardCreate()
@@ -60,13 +64,9 @@ public class TicTacToeGame
     public static int tossCoin()
     {
      int toss=(int)(Math.random()*10)%2;
-     final int HEADS=0;
-     final int TAILS=1;
-     if(toss==HEADS)
-     System.out.println("User Plays First");
+     return USER;
      else
-     System.out.println("Computer Plays First");
-     return toss;
+     return COMPUTER;
     }
     public static void main(String args[])
     {
@@ -75,7 +75,7 @@ public class TicTacToeGame
         boardCreate();
         char choice=newTurn();
         displayBoard();
-        tossCoin();
+        System.out.println(tossCoin());
         int index=chooseIndex();
         makeDesiredMove(index,choice);
         displayBoard();
