@@ -1,10 +1,10 @@
 import java.util.*;
 public class TicTacToeGame
 {
-    static final int HEADS=0;
+	static final int HEADS=0;
     static final int TAILS=1;
-    static final String USER="USER starts first";
-    static final String COMPUTER ="COMPUTER starts first";
+    static final String USER="USER";
+    static final String COMPUTER ="COMPUTER";
     static char[] board;
     /*UC1*/
     public static void boardCreate()
@@ -19,7 +19,7 @@ public class TicTacToeGame
     public static char newTurn()
     {
     	Scanner s=new Scanner(System.in);
-    	System.out.println("Enter X or O as your turn");
+    	System.out.println("Enter X or O as your Choice");
     	char Symbol=s.next().charAt(0);
     	System.out.println(Symbol+" is for User");
     	return Symbol;
@@ -38,9 +38,10 @@ public class TicTacToeGame
     {
         Scanner a=new Scanner(System.in);
         System.out.println("Enter an Index from 1 to 9");
-        int i=a.nextInt();
+        int i;
             while(true)
             {
+            i=a.nextInt();
             if(board[i]!=' ')
              	{
                 System.out.println("Choose Another Index! Index not free");
@@ -52,13 +53,13 @@ public class TicTacToeGame
     }
     /*UC5*/
     public static void makeDesiredMove(int indexForPlaying,char choiceXorO)
-    {
+    {	
         if(board[indexForPlaying]==' ')
-            board[indexForPlaying]=choiceXorO;
-        else
         {
-            System.out.println("Unable to make the move");
+            board[indexForPlaying]=choiceXorO;
         }
+        else
+            System.out.println("Unable to make the move");
     }
     /*UC6*/
     public static String checkWhoPlaysFirst()
@@ -83,7 +84,14 @@ public class TicTacToeGame
 		 return true;
 		 else
 		 return false;
-
+	}
+	/*UC8*/
+	public static boolean checkIfICouldWin(char board[],char choiceXorO)
+	{
+		char dummyBoard[]=new char[10];
+		for(int i=1;i<10;i++)
+		dummyBoard[i]=board[i];
+		return checkWinner(dummyBoard,choiceXorO);
 	}
     public static void main(String args[])
     {
@@ -91,9 +99,14 @@ public class TicTacToeGame
     	Scanner sc=new Scanner(System.in);
         boardCreate();
         char choiceXorO=newTurn();
-        System.out.println(checkWhoPlaysFirst());
+        String FirstPlay=checkWhoPlaysFirst();
+        System.out.println(FirstPlay+" plays First.");
+        if(FirstPlay.matches("USER"))
+        {
         int index=chooseIndex();
         makeDesiredMove(index,choiceXorO);
+        }
+        System.out.println(checkIfICouldWin(board, choiceXorO));	
         System.out.println(checkWinner(board, choiceXorO));
         displayBoard();
     }
