@@ -61,7 +61,7 @@ public class TicTacToeGame
         }
     }
     /*UC6*/
-    public static int tossCoinForFirstMove()
+    public static int tossCoinToCheckWhoPlaysFirst()
     {
      int toss=(int)(Math.random()*10)%2;
      return USER;
@@ -75,7 +75,7 @@ public class TicTacToeGame
         boardCreate();
         char choice=newTurn();
         displayBoard();
-        System.out.println(tossCoinForFirstMove());
+        System.out.println(tossCoinToCheckWhoPlaysFirst());
         int index=chooseIndex();
         makeDesiredMove(index,choice);
         displayBoard();
