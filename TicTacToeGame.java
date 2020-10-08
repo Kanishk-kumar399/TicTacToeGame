@@ -3,7 +3,7 @@ public class TicTacToeGame
 {
     static final int HEADS=0;
     static final int TAILS=1;
-    static final String USER="USER starts first";
+    static final String USER="USER starts first.";
     static final String COMPUTER ="COMPUTER starts first";
     static char[] board;
     /*UC1*/
@@ -61,7 +61,7 @@ public class TicTacToeGame
         }
     }
     /*UC6*/
-    public static int tossCoin()
+    public static int tossCoinForFirstMove()
     {
      int toss=(int)(Math.random()*10)%2;
      return USER;
@@ -75,7 +75,7 @@ public class TicTacToeGame
         boardCreate();
         char choice=newTurn();
         displayBoard();
-        System.out.println(tossCoin());
+        System.out.println(tossCoinForFirstMove());
         int index=chooseIndex();
         makeDesiredMove(index,choice);
         displayBoard();
