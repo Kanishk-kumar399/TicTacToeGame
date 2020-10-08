@@ -3,7 +3,7 @@ public class TicTacToeGame
 {
     static final int HEADS=0;
     static final int TAILS=1;
-    static final String USER="USER starts first.";
+    static final String USER="USER starts first";
     static final String COMPUTER ="COMPUTER starts first";
     static char[] board;
     /*UC1*/
@@ -51,33 +51,50 @@ public class TicTacToeGame
             return i;
     }
     /*UC5*/
-    public static void makeDesiredMove(int indexForPlaying,char playerTurn)
+    public static void makeDesiredMove(int indexForPlaying,char choiceXorO)
     {
         if(board[indexForPlaying]==' ')
-            board[indexForPlaying]=playerTurn;
+            board[indexForPlaying]=choiceXorO;
         else
         {
             System.out.println("Unable to make the move");
         }
     }
     /*UC6*/
-    public static int tossCoinToCheckWhoPlaysFirst()
+    public static String checkWhoPlaysFirst()
     {
      int toss=(int)(Math.random()*10)%2;
+     if(toss==HEADS)
      return USER;
      else
      return COMPUTER;
     }
+    /*UC7*/
+	public static boolean checkWinner(char board[],char choiceXorO) 
+	{
+	   if((board[1]==choiceXorO && board[2]==choiceXorO && board[3]==choiceXorO)
+		||(board[4]==choiceXorO && board[5]==choiceXorO && board[6]==choiceXorO)
+		||(board[7]==choiceXorO && board[8]==choiceXorO && board[9]==choiceXorO)
+		||(board[1]==choiceXorO && board[4]==choiceXorO && board[7]==choiceXorO)
+		||(board[2]==choiceXorO && board[5]==choiceXorO && board[8]==choiceXorO)
+		||(board[3]==choiceXorO && board[6]==choiceXorO && board[9]==choiceXorO)
+		||(board[1]==choiceXorO && board[5]==choiceXorO && board[9]==choiceXorO)
+		||(board[3]==choiceXorO && board[5]==choiceXorO && board[7]==choiceXorO))
+		 return true;
+		 else
+		 return false;
+
+	}
     public static void main(String args[])
     {
     	System.out.println("Welcome to Tic Tac Toe Game");
     	Scanner sc=new Scanner(System.in);
         boardCreate();
-        char choice=newTurn();
-        displayBoard();
-        System.out.println(tossCoinToCheckWhoPlaysFirst());
+        char choiceXorO=newTurn();
+        System.out.println(checkWhoPlaysFirst());
         int index=chooseIndex();
-        makeDesiredMove(index,choice);
+        makeDesiredMove(index,choiceXorO);
+        System.out.println(checkWinner(board, choiceXorO));
         displayBoard();
     }
 }
