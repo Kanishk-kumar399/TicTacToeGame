@@ -1,7 +1,7 @@
 import java.util.*;
-public class TicTacToeGame
+public class Main
 {
-	static final int HEADS=0;
+    static final int HEADS=0;
     static final int TAILS=1;
     static final String USER="USER";
     static final String COMPUTER ="COMPUTER";
@@ -52,7 +52,7 @@ public class TicTacToeGame
             return i;
     }
     /*UC5*/
-    public static void makeDesiredMove(int indexForPlaying,char choiceXorO)
+    public static void makeDesiredMove(char board[],int indexForPlaying,char choiceXorO)
     {	
         if(board[indexForPlaying]==' ')
         {
@@ -71,8 +71,10 @@ public class TicTacToeGame
      return COMPUTER;
     }
     /*UC7*/
-	public static boolean checkWinner(char board[],char choiceXorO) 
+	public static String checkWinner(char board[],char choiceXorO) 
 	{
+		int i=1;
+		int counter=0;
 	   if((board[1]==choiceXorO && board[2]==choiceXorO && board[3]==choiceXorO)
 		||(board[4]==choiceXorO && board[5]==choiceXorO && board[6]==choiceXorO)
 		||(board[7]==choiceXorO && board[8]==choiceXorO && board[9]==choiceXorO)
@@ -81,19 +83,38 @@ public class TicTacToeGame
 		||(board[3]==choiceXorO && board[6]==choiceXorO && board[9]==choiceXorO)
 		||(board[1]==choiceXorO && board[5]==choiceXorO && board[9]==choiceXorO)
 		||(board[3]==choiceXorO && board[5]==choiceXorO && board[7]==choiceXorO))
-		 return true;
-		 else
-		 return false;
+		return "WIN";
+	   for(i=1;i<10;i++)
+	   {
+		   if(board[i]!=' ')
+			   counter++;
+	   }
+	   if(counter==9)
+		   return "TIE";
+	   else
+		   return "TURN";
 	}
 	/*UC8*/
-	public static boolean checkIfICouldWin(char board[],char choiceXorO)
+	public static int checkIfICouldWinAndGetIndex(char board[],char choiceXorO)
 	{
+		int index=0;
 		char dummyBoard[]=new char[10];
 		for(int i=1;i<10;i++)
+		{
 		dummyBoard[i]=board[i];
-		return checkWinner(dummyBoard,choiceXorO);
+		if(dummyBoard[i]==' ')
+		{
+			dummyBoard[i]=choiceXorO;
+			if(checkWinner(dummyBoard,choiceXorO).matches("WIN"))
+			{
+			index=i;
+			return index;
+			}
+		}
+		}
+		return 0;
 	}
-    public static void main(String args[])
+	 public static void main(String args[])
     {
     	System.out.println("Welcome to Tic Tac Toe Game");
     	Scanner sc=new Scanner(System.in);
@@ -104,9 +125,9 @@ public class TicTacToeGame
         if(FirstPlay.matches("USER"))
         {
         int index=chooseIndex();
-        makeDesiredMove(index,choiceXorO);
+        makeDesiredMove(board,index,choiceXorO);
         }
-        System.out.println(checkIfICouldWin(board, choiceXorO));	
+        System.out.println(checkIfICouldWinAndGetIndex(board, choiceXorO));	
         System.out.println(checkWinner(board, choiceXorO));
         displayBoard();
     }
