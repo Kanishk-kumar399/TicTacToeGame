@@ -114,6 +114,26 @@ public class Main
 		}
 		return 0;
 	}
+	/*UC9*/
+	public static int computerChecksIndexToBlockWin(char board[],char opponentXorO)
+	{	
+		int index=0;
+		char dummyBoard[]=new char[10];
+		for(int i=1;i<10;i++)
+		{
+			dummyBoard[i]=board[i];
+			if(dummyBoard[i]==' ')
+			{
+				dummyBoard[i]=opponentXorO;
+				if(checkWinner(dummyBoard,opponentXorO).equals("WIN"))
+				{
+					index=i;
+					return index;
+				}
+			}
+		}
+		return 0;
+	}
 	 public static void main(String args[])
     {
     	System.out.println("Welcome to Tic Tac Toe Game");
