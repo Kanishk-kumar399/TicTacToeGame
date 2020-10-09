@@ -94,24 +94,6 @@ public class Main
 	   else
 		   return "TURN";
 	}
-	/*UC8*/
-	public static int checkIfICouldWinAndGetIndex(char board[],char choiceXorO)
-	{
-		int index=0;
-		char dummyBoard[]=new char[10];
-		for(int i=1;i<10;i++)
-		{
-		dummyBoard[i]=board[i];
-		if(dummyBoard[i]==' ')
-			dummyBoard[i]=choiceXorO;
-		if(checkWinner(dummyBoard,choiceXorO).matches("WIN"))
-		{
-			index=i;
-			return index;
-		}
-		}
-		return index;
-	}
 	 public static void main(String args[])
     {
     	System.out.println("Welcome to Tic Tac Toe Game");
