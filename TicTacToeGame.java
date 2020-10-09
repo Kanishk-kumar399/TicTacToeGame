@@ -1,5 +1,5 @@
 import java.util.*;
-public class Main
+public class TicTacToeGame
 {
 	static final int HEADS=0;
     static final int TAILS=1;
@@ -95,21 +95,24 @@ public class Main
 		   return "TURN";
 	}
 	/*UC8*/
-	public static int checkIfICouldWinAndGetIndex(char board[],char choiceXorO)
+	public static int checkIfICouldWinAndGetIndex(char board[],char computerChoice)
 	{
 		int index=0;
 		char dummyBoard[]=new char[10];
 		for(int i=1;i<10;i++)
-		{
 		dummyBoard[i]=board[i];
+		for(int i=1;i<10;i++)
+		{
 		if(dummyBoard[i]==' ')
 			{
-			dummyBoard[i]=choiceXorO;
-			if(checkWinner(dummyBoard,choiceXorO).matches("WIN"))
+			dummyBoard[i]=computerChoice;
+			if(checkWinner(dummyBoard,computerChoice).equals("WIN"))
 			{
 			index=i;
 			return index;
 			}
+			else
+				dummyBoard[i]=' ';
 			}
 		}
 		return 0;
@@ -120,8 +123,9 @@ public class Main
 		int index=0;
 		char dummyBoard[]=new char[10];
 		for(int i=1;i<10;i++)
-		{
 			dummyBoard[i]=board[i];
+		for(int i=1;i<10;i++)
+		{
 			if(dummyBoard[i]==' ')
 			{
 				dummyBoard[i]=opponentXorO;
@@ -130,6 +134,8 @@ public class Main
 					index=i;
 					return index;
 				}
+				else
+					dummyBoard[i]=' ';
 			}
 		}
 		return 0;
@@ -168,21 +174,65 @@ public class Main
 		}
 		return index;
 	}
-	public static void main(String args[])
+	/*UC12 and Main Function*/
+    public static void main(String args[])
     {
-    	System.out.println("Welcome to Tic Tac Toe Game");
+    	System.out.println("Welcome to Tic Tac Toe Game\n");
     	Scanner sc=new Scanner(System.in);
         boardCreate();
-        char choiceXorO=newTurn();
+        int numberOfTurns=1;
+        char choiceForUserAsOorX=newTurn();
+        char computerChoice;
+        char playerWhichPlays;
+        if(choiceForUserAsOorX=='X')
+        	computerChoice='O';
+        else
+        	computerChoice='X';
         String FirstPlay=checkWhoPlaysFirst();
-        System.out.println(FirstPlay+" plays First.");
         if(FirstPlay.matches("USER"))
+        	playerWhichPlays=choiceForUserAsOorX; 
+        else
+        	playerWhichPlays=computerChoice;
+        System.out.println(FirstPlay+" plays First.");
+        while(numberOfTurns<=9)
         {
-        int index=chooseIndex();
-        makeDesiredMove(board,index,choiceXorO);
+        	numberOfTurns++;
+        	if(playerWhichPlays!=computerChoice)
+        	{
+        	int index=chooseIndex();
+        	makeDesiredMove(board,index,choiceForUserAsOorX);
+        	}
+        	else
+        	{
+        		if(checkIfICouldWinAndGetIndex(board, computerChoice)!=0)
+        		makeDesiredMove(board, checkIfICouldWinAndGetIndex(board, computerChoice), computerChoice);
+        		else if(computerChecksIndexToBlockWin(board, choiceForUserAsOorX)!=0)
+        		{
+        			makeDesiredMove(board, computerChecksIndexToBlockWin(board, choiceForUserAsOorX), computerChoice);
+        		}
+        		else
+        		{
+        		int index=computerMoveForCorners(board);
+        			if(index==0)
+        			index=computerMoveForOtherPlaces(board);
+        			makeDesiredMove(board,index, computerChoice);
+        		}
+        	}
+        	displayBoard();
+        	if(checkWinner(board, playerWhichPlays).matches("WIN"))
+        	{
+        		if(playerWhichPlays==computerChoice)
+        			System.out.println("Winner is Computer");
+        		else
+        			System.out.println("Winner is User");
+        			break;
+        	}
+        	else
+        		System.out.println(checkWinner(board, playerWhichPlays));
+        	if(playerWhichPlays=='X')
+        		playerWhichPlays='O';
+        	else
+        		playerWhichPlays='X';
         }
-        System.out.println(checkIfICouldWinAndGetIndex(board, choiceXorO));	
-        System.out.println(checkWinner(board, choiceXorO));
-        displayBoard();
     }
 }
