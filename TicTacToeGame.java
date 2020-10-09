@@ -142,7 +142,29 @@ public class Main
 		for(int i=0;i<4;i++)
 		{
 			if(board[cornerIndex[i]]==' ')
+				{
 				index=cornerIndex[i];
+				break;
+				}
+		}
+		return index;
+	}
+	/*UC11*/
+	public static int computerMoveForOtherPlaces(char board[])
+	{
+		int index=5;
+		if(board[index]==' ')
+			index=5;
+		else
+		{
+			for(int i=2;i<=8;i=i+2)
+			{
+				if(board[i]==' ')
+					{
+					index=i;
+					break;
+					}
+			}
 		}
 		return index;
 	}
