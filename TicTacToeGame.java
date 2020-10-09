@@ -134,7 +134,19 @@ public class Main
 		}
 		return 0;
 	}
-	 public static void main(String args[])
+	/*UC10*/
+	public static int computerMoveForCorners(char board[])
+	{
+		int index=0;
+		int cornerIndex[]= {1,3,7,9};
+		for(int i=0;i<4;i++)
+		{
+			if(board[cornerIndex[i]]==' ')
+				index=cornerIndex[i];
+		}
+		return index;
+	}
+	public static void main(String args[])
     {
     	System.out.println("Welcome to Tic Tac Toe Game");
     	Scanner sc=new Scanner(System.in);
