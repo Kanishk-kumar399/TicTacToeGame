@@ -34,7 +34,7 @@ public class TicTacToeGame
 		System.out.println("  "+board[7] + " | " + board[8] + " | " + board[9]);
     }
     /*UC4*/
-    public static int chooseIndex()
+    public static int chooseIndex(char board[])
     {
         Scanner a=new Scanner(System.in);
         System.out.println("Enter an Index from 1 to 9");
@@ -51,7 +51,7 @@ public class TicTacToeGame
             return i;
     }
     /*UC5*/
-    public static void makeDesiredMove(int indexForPlaying,char choiceXorO)
+    public static void makeDesiredMove(char board[],int indexForPlaying,char choiceXorO)
     {
         if(board[indexForPlaying]==' ')
             board[indexForPlaying]=choiceXorO;
@@ -70,8 +70,10 @@ public class TicTacToeGame
      return COMPUTER;
     }
     /*UC7*/
-	public static boolean checkWinner(char board[],char choiceXorO) 
+	public static String checkWinner(char board[],char choiceXorO) 
 	{
+		int i=1;
+		int counter=0;
 	   if((board[1]==choiceXorO && board[2]==choiceXorO && board[3]==choiceXorO)
 		||(board[4]==choiceXorO && board[5]==choiceXorO && board[6]==choiceXorO)
 		||(board[7]==choiceXorO && board[8]==choiceXorO && board[9]==choiceXorO)
@@ -80,10 +82,16 @@ public class TicTacToeGame
 		||(board[3]==choiceXorO && board[6]==choiceXorO && board[9]==choiceXorO)
 		||(board[1]==choiceXorO && board[5]==choiceXorO && board[9]==choiceXorO)
 		||(board[3]==choiceXorO && board[5]==choiceXorO && board[7]==choiceXorO))
-		 return true;
-		 else
-		 return false;
-
+		return "WIN";
+	   for(i=1;i<10;i++)
+	   {
+		   if(board[i]!=' ')
+			   counter++;
+	   }
+	   if(counter==9)
+		   return "TIE";
+	   else
+		   return "TURN";
 	}
     public static void main(String args[])
     {
@@ -92,8 +100,8 @@ public class TicTacToeGame
         boardCreate();
         char choiceXorO=newTurn();
         System.out.println(checkWhoPlaysFirst());
-        int index=chooseIndex();
-        makeDesiredMove(index,choiceXorO);
+        int index=chooseIndex(board);
+        makeDesiredMove(board,index,choiceXorO);
         System.out.println(checkWinner(board, choiceXorO));
         displayBoard();
     }
