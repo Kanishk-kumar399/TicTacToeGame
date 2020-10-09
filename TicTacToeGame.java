@@ -174,8 +174,8 @@ public class TicTacToeGame
 		}
 		return index;
 	}
-	/*UC12 and Main Function*/
-    public static void main(String args[])
+	/*UC12 and*/
+    public static void newGame()
     {
     	System.out.println("Welcome to Tic Tac Toe Game\n");
     	Scanner sc=new Scanner(System.in);
@@ -234,5 +234,19 @@ public class TicTacToeGame
         	else
         		playerWhichPlays='X';
         }
+    }
+    /*UC13 and main function*/
+    public static void main(String args[])
+    {
+    	Scanner choice=new Scanner(System.in);
+    	while(true)
+    	{
+    		System.out.println("Do you want to play Tic Tac Toe(Y/N)");
+    		char YesOrNo=choice.next().charAt(0);
+    		if(YesOrNo=='Y')
+    			newGame();
+    		else
+    			break;
+    	}
     }
 }
