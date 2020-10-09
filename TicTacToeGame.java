@@ -1,7 +1,7 @@
 import java.util.*;
 public class Main
 {
-    static final int HEADS=0;
+	static final int HEADS=0;
     static final int TAILS=1;
     static final String USER="USER";
     static final String COMPUTER ="COMPUTER";
@@ -103,16 +103,14 @@ public class Main
 		{
 		dummyBoard[i]=board[i];
 		if(dummyBoard[i]==' ')
-		{
 			dummyBoard[i]=choiceXorO;
-			if(checkWinner(dummyBoard,choiceXorO).matches("WIN"))
-			{
+		if(checkWinner(dummyBoard,choiceXorO).matches("WIN"))
+		{
 			index=i;
 			return index;
-			}
 		}
 		}
-		return 0;
+		return index;
 	}
 	 public static void main(String args[])
     {
